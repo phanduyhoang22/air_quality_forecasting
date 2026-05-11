@@ -1,0 +1,24 @@
+============================================================
+  PM2.5 Forecasting — Evaluation Summary
+============================================================
+  RMSE (model)     : 4.8107 µg/m³
+  RMSE (baseline)  : 27.2207 µg/m³
+  RMSE improvement : 82.33%
+  R²               : 0.9451
+  MAE              : 3.2439 µg/m³
+
+  Classification (EPA threshold = 35.4 µg/m³):
+  F1-Score (Bad)   : 0.9079
+  Recall   (Bad)   : 0.9001
+
+  Full Classification Report:
+               precision    recall  f1-score   support
+
+Good/Moderate       0.96      0.97      0.97      7528
+    Unhealthy       0.92      0.90      0.91      2884
+
+     accuracy                           0.95     10412
+    macro avg       0.94      0.93      0.94     10412
+ weighted avg       0.95      0.95      0.95     10412
+
+============================================================

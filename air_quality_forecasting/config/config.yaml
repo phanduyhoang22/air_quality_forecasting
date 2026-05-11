@@ -1,0 +1,56 @@
+# =============================================================================
+# Air Quality Forecasting — Configuration File
+# Project: PM2.5 Prediction via Multivariate Ridge Regression
+# =============================================================================
+
+cities:
+  hanoi:
+    lat: 21.0285
+    lon: 105.8542
+    name: "Hà Nội"
+  haiphong:
+    lat: 20.8449
+    lon: 106.6881
+    name: "Hải Phòng"
+  danang:
+    lat: 16.0544
+    lon: 108.2022
+    name: "Đà Nẵng"
+  hcmc:
+    lat: 10.8231
+    lon: 106.6297
+    name: "TP. Hồ Chí Minh"
+
+timezone: "Asia/Ho_Chi_Minh"   # UTC+7 — uniform for all 4 cities
+
+data:
+  start_date: "2023-01-01"
+  end_date:   "2024-12-31"
+  # Chronological split ratios (sum = 1.0)
+  train_ratio: 0.70
+  val_ratio:   0.15
+  test_ratio:  0.15
+
+features:
+  # Lag hours for time-series memory (anti-leakage: delta = lag_i - lag_j)
+  lag_hours:      [1, 2, 3, 6, 12, 24, 48, 72, 168]
+  # Rolling windows (hours) for smoothed statistics
+  rolling_windows: [3, 6, 12, 24]
+
+model:
+  alpha:         1.0     # L2 regularization strength λ
+  learning_rate: 0.01    # η for gradient descent
+  max_epochs:    2000    # upper bound on iterations
+  batch_size:    512     # mini-batch size
+  patience:      30      # early-stopping patience (epochs w/o improvement)
+  tol:           1.0e-6  # convergence tolerance on Δloss
+
+threshold:
+  pm25_bad: 35.4    # US EPA 24h standard → binary classification cutoff (µg/m³)
+
+paths:
+  raw_data:       "data/raw"
+  processed_data: "data/processed"
+  models:         "outputs/models"
+  figures:        "outputs/figures"
+  reports:        "outputs/reports"

@@ -1,0 +1,59 @@
+2026-04-21 17:32:22  INFO      main  Stage 1 -- Loading cached raw data from data\raw
+2026-04-21 17:32:24  INFO      main  Stage 1 complete. Shape: (70084, 16)
+2026-04-21 17:32:24  INFO      main  Stage 2 — Feature Engineering ...
+2026-04-21 17:32:24  INFO      src.features.engineering  Building features. Input shape: (70084, 16)
+2026-04-21 17:32:24  INFO      src.features.engineering  Feature engineering complete. Output shape: (70084, 55)
+2026-04-21 17:32:24  INFO      main  Stage 2 complete. Shape: (70084, 55)
+2026-04-21 17:32:24  INFO      main  Stage 3 — Preprocessing (split + scale + OHE) ...
+2026-04-21 17:32:24  INFO      src.data.preprocessing  City dummy columns: ['city_danang', 'city_haiphong', 'city_hcmc']
+2026-04-21 17:32:24  INFO      src.data.preprocessing  Split -> Train: 48588  Val: 10412  Test: 10412  (total: 69412)
+2026-04-21 17:32:24  INFO      src.data.preprocessing  Scaler fitted on 52 columns.
+2026-04-21 17:32:25  INFO      src.data.preprocessing  Scaler fitted on 1 columns.
+2026-04-21 17:32:25  INFO      src.data.preprocessing  Scaler saved -> outputs\models\scaler_stats.pkl
+2026-04-21 17:32:25  INFO      src.data.preprocessing  Scaler saved -> outputs\models\target_scaler_stats.pkl
+2026-04-21 17:32:25  INFO      src.data.preprocessing  X_train: (48588, 52)  X_val: (10412, 52)  X_test: (10412, 52)
+2026-04-21 17:32:25  INFO      main  Stage 3 complete.
+2026-04-21 17:32:25  INFO      main  Stage 4 — Model Training ...
+2026-04-21 17:32:25  INFO      src.models.ridge_regression  Training Ridge: n=48588  p=52  α=0.5000  η=0.00500  max_epochs=2000
+2026-04-21 17:32:27  INFO      src.models.ridge_regression  Early stopping at epoch 36  (best_val_loss=0.023752  epoch=6)
+2026-04-21 17:32:27  INFO      src.models.ridge_regression  Training complete. Best epoch: 6
+2026-04-21 17:32:27  INFO      src.models.ridge_regression  Model saved → outputs\models\ridge_model.pkl
+2026-04-21 17:32:27  INFO      main  Stage 4 complete. Best epoch: 6
+2026-04-21 17:32:27  INFO      main  Stage 5 — Evaluation ...
+2026-04-21 17:32:27  INFO      src.evaluation.metrics  ── Regression Metrics ──────────────────────────────
+2026-04-21 17:32:27  INFO      src.evaluation.metrics    RMSE (model)    : 4.8107 µg/m³
+2026-04-21 17:32:27  INFO      src.evaluation.metrics    RMSE (baseline) : 27.2207 µg/m³
+2026-04-21 17:32:27  INFO      src.evaluation.metrics    RMSE improvement: 82.33%
+2026-04-21 17:32:27  INFO      src.evaluation.metrics    R²              : 0.9451
+2026-04-21 17:32:27  INFO      src.evaluation.metrics    MAE             : 3.2439 µg/m³
+2026-04-21 17:32:27  INFO      src.evaluation.metrics  ── Classification Report ────────────────────────────
+2026-04-21 17:32:27  INFO      src.evaluation.metrics  
+               precision    recall  f1-score   support
+
+Good/Moderate       0.96      0.97      0.97      7528
+    Unhealthy       0.92      0.90      0.91      2884
+
+     accuracy                           0.95     10412
+    macro avg       0.94      0.93      0.94     10412
+ weighted avg       0.95      0.95      0.95     10412
+
+2026-04-21 17:32:27  INFO      src.evaluation.metrics  Per-city evaluation:
+              RMSE        R2       MAE    F1_Bad  Recall_Bad  n_samples    pct_bad
+city                                                                              
+danang    4.746111  0.949281  3.226056  0.904372    0.898236       2603  28.313484
+haiphong  4.859581  0.944333  3.278234  0.923936    0.922006       2603  27.583557
+hanoi     4.821236  0.945529  3.215461  0.910650    0.904830       2603  27.045716
+hcmc      4.815021  0.940511  3.255734  0.892481    0.875862       2603  27.852478
+2026-04-21 17:32:27  INFO      main  Summary saved -> outputs\reports\summary_metrics.txt
+2026-04-21 17:32:27  INFO      main  Stage 5 complete.
+2026-04-21 17:32:27  INFO      main  Stage 6 — Visualisation ...
+2026-04-21 17:32:27  INFO      src.visualization.plots  Figure saved -> outputs\figures\01_learning_curve.png
+2026-04-21 17:32:28  INFO      src.visualization.plots  Figure saved -> outputs\figures\02_residual_distribution.png
+2026-04-21 17:32:28  INFO      src.visualization.plots  Figure saved -> outputs\figures\03_actual_vs_predicted.png
+2026-04-21 17:32:29  INFO      src.visualization.plots  Figure saved -> outputs\figures\04_feature_weights.png
+2026-04-21 17:32:29  INFO      src.visualization.plots  Figure saved -> outputs\figures\05_time_series_All_Cities.png
+2026-04-21 17:32:34  INFO      src.visualization.plots  Figure saved -> outputs\figures\06_residual_vs_predicted.png
+2026-04-21 17:32:35  INFO      src.visualization.plots  Figure saved -> outputs\figures\07_city_comparison.png
+2026-04-21 17:32:35  INFO      src.visualization.plots  All figures saved to outputs\figures
+2026-04-21 17:32:35  INFO      main  Stage 6 complete.
+2026-04-21 17:32:35  INFO      main  Pipeline finished successfully.
